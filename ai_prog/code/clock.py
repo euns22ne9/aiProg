@@ -10,7 +10,7 @@ ws.title('Analog Clock')
 
 t = turtle.Turtle()
 t.shape('turtle')
-t.speed(300)
+t.speed(3000)
 t.pensize(5)
 t.hideturtle()
 
