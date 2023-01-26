@@ -6,15 +6,16 @@ ws = turtle.Screen()
 ws.bgcolor('black')
 ws.setup(width=600, height=600)
 ws.title('Analog Clock')
-#ws.tracer(0)
+ws.tracer(0)
 
 t = turtle.Turtle()
 t.shape('turtle')
-t.speed(3000)
+t.speed(0)
 t.pensize(5)
 t.hideturtle()
 
-def drawMin():
+def drawClock(h, min, second):
+    t.pensize(3)
     for n in range(12):
         t.pencolor('red')
         t.penup()
@@ -25,30 +26,33 @@ def drawMin():
         t.circle(20)
         t.penup()
         t.home()
-
-'''
-t.pendown()
-while True:
-    for n in range(60):
-        t.pencolor('orange')    
-        t.setheading(90 - 6 * n)
-        t.forward(150)
-        t.pencolor('white')
-        t.setheading(270 - 6 * n)
-        t.home()
-'''
-'''
-while True:
-    hour = int(time.strftime('%I'))
-    min = int(time.strftime('%M'))
-    sec = int(time.strftime('%S'))
+    
+    t.penup()
+    t.pensize(3)
     t.pencolor('orange')    
-    t.setheading(90 - 6 * sec)
-    t.forward(150)
-    t.pencolor('white')
-    t.setheading(270 - 6 * sec)
     t.home()
-'''
+    t.setheading(90)
+    t.rt(second * 6)
+    t.pendown()
+    t.fd(150)
+
+    t.penup()
+    t.pensize(7)
+    t.pencolor('purple')    
+    t.home()
+    t.setheading(90)
+    t.rt(min * 6)
+    t.pendown()
+    t.fd(110)
+
+    t.penup()
+    t.pensize(12)
+    t.pencolor('white')
+    t.home()
+    t.setheading(90)
+    t.rt(h * 30)
+    t.pendown()
+    t.fd(80)
 
 def draw_second(second):
     t.penup()
@@ -59,6 +63,7 @@ def draw_second(second):
     t.rt(second * 6)
     t.pendown()
     t.fd(150)
+    
 
 def draw_min(min):
     t.penup()
@@ -80,16 +85,12 @@ def draw_hour(h):
     t.pendown()
     t.fd(80)
 
-t.pendown()
+
 while True:
-    drawMin()
     hour = int(time.strftime('%I'))
     min = int(time.strftime('%M'))
     sec = int(time.strftime('%S'))
-    print(hour, min, sec, sep=":")
-    draw_hour(hour)
-    draw_min(min)
-    draw_second(sec)
+    drawClock(hour,min, sec)
     ws.update()
     time.sleep(1)
     t.clear()
